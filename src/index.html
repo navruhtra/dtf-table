@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ADN DTF Table</title>
+<meta name="description" content="Prepare direct-to-film print files in your browser: alpha repair, white layer, gang sheets at your roll width, preflight and a garment proof. Files go to your own RIP. Your art stays on your computer.">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="vendor/separation-table/bench.css">
+<link rel="stylesheet" href="page.css">
+<script type="module" src="page.js"></script>
+</head>
+<body>
+<header class="mhead"><b>DTF Table</b><button type="button" id="mShop" aria-label="Shop setup"><svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M6.76 3.17 L7.43 0.9 L10.57 0.9 L11.24 3.17 L12.93 4.14 L15.23 3.59 L16.8 6.31 L15.17 8.02 L15.17 9.98 L16.8 11.69 L15.23 14.41 L12.93 13.86 L11.24 14.83 L10.57 17.1 L7.43 17.1 L6.76 14.83 L5.07 13.86 L2.77 14.41 L1.2 11.69 L2.83 9.98 L2.83 8.02 L1.2 6.31 L2.77 3.59 L5.07 4.14 Z M11.5 9 A2.5 2.5 0 1 0 6.5 9 A2.5 2.5 0 1 0 11.5 9 Z"/></svg></button></header>
+<div class="v3">
+<aside class="pane steps" id="paneSteps" aria-label="Steps">
+  <div class="brand"><div class="lab">ADN · DTF prepress</div><h1>DTF Table</h1></div>
+
+  <section class="sstep" id="step1" data-step="1" aria-labelledby="sth1">
+    <div class="sthead"><button type="button" class="stbtn" id="step1Btn" aria-expanded="false" aria-controls="step1Body"><span class="badge" id="step1Badge">1</span><span class="stt"><span class="sttitle" id="sth1">Artwork</span><span class="stsum" id="step1Sum"></span></span></button><span class="hw" data-help="art"></span><span class="stact" aria-hidden="true" id="step1Act">Open</span></div>
+    <div class="stbody" id="step1Body" hidden>
+      <p class="stlead">Drop transparent PNG files in the workspace, or click it to select them. Set each design's width and copies.</p>
+      <ol class="designs" id="designs" aria-label="Designs"></ol>
+      <div class="row"><button type="button" id="addMore">Add designs</button><button type="button" class="linkbtn" id="trySample">Try the sample designs</button></div>
+      <button type="button" class="next" data-next="2">Next: Machine / garment →</button>
+    </div>
+  </section>
+
+  <section class="sstep" id="step2" data-step="2" aria-labelledby="sth2">
+    <div class="sthead"><button type="button" class="stbtn" id="step2Btn" aria-expanded="false" aria-controls="step2Body"><span class="badge" id="step2Badge">2</span><span class="stt"><span class="sttitle" id="sth2">Machine / garment</span><span class="stsum" id="step2Sum"></span></span></button><span class="hw" data-help="machine"></span><span class="stact" aria-hidden="true" id="step2Act">Open</span></div>
+    <div class="stbody" id="step2Body" hidden>
+      <div class="field"><label class="lab" for="machine" data-help="machine">Printer</label><select id="machine"></select></div>
+      <div class="two">
+        <div class="field"><label class="lab" for="width" data-help="rollWidth">Roll width, in</label><div class="stepper sp"><button type="button" class="stp" data-for="width" data-d="-1" aria-label="Roll width smaller">−</button><input type="number" id="width" min="1" max="120" step="0.25" value="22"><button type="button" class="stp" data-for="width" data-d="1" aria-label="Roll width larger">+</button></div></div>
+        <div class="field"><label class="lab" for="maxlen" data-help="maxLen">Longest print, in</label><input type="number" id="maxlen" min="1" step="1" placeholder="No limit"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label class="lab" for="dpi" data-help="dpi">Resolution, dpi</label><input type="number" id="dpi" min="72" max="2880" step="1" value="300"></div>
+        <div class="field"><label class="lab" for="mirror" data-help="mirror">Files read</label><select id="mirror"><option value="right">Right reading</option><option value="mirror">Mirrored</option></select></div>
+      </div>
+      <div class="field"><label class="lab" for="white" data-help="whiteOut">White</label><select id="white"><option value="none">The RIP makes white</option><option value="file">Also write a white file</option></select></div>
+      <div class="field"><span class="lab" data-help="garment">Garment colour · <span class="teename" id="teeName">Black</span></span>
+        <div class="chips tees" id="garments"></div></div>
+      <p class="small" id="machineNote"></p>
+      <button type="button" class="next" data-next="3">Next: Gang sheet →</button>
+    </div>
+  </section>
+
+  <section class="sstep" id="step3" data-step="3" aria-labelledby="sth3">
+    <div class="sthead"><button type="button" class="stbtn" id="step3Btn" aria-expanded="false" aria-controls="step3Body"><span class="badge" id="step3Badge">3</span><span class="stt"><span class="sttitle" id="sth3">Gang sheet</span><span class="stsum" id="step3Sum"></span></span></button><span class="hw" data-help="build"></span><span class="stact" aria-hidden="true" id="step3Act">Open</span></div>
+    <div class="stbody" id="step3Body" hidden>
+      <div class="field"><label class="lab" for="gap" data-help="gap">Gap, in</label><div class="stepper sp narrow"><button type="button" class="stp" data-for="gap" data-d="-0.05" aria-label="Gap smaller">−</button><input type="number" id="gap" min="0" max="2" step="0.05" value="0.25"><button type="button" class="stp" data-for="gap" data-d="0.05" aria-label="Gap larger">+</button></div></div>
+      <button type="button" class="sepbtn" id="build" disabled>Build sheet</button>
+      <div class="notice"><div id="status" class="small statusline" role="status" aria-live="polite"></div></div>
+      <ol class="sheets" id="sheets" aria-label="Sheets"></ol>
+      <button type="button" class="next" data-next="4">Next: Export →</button>
+    </div>
+  </section>
+
+  <section class="sstep" id="step4" data-step="4" aria-labelledby="sth4">
+    <div class="sthead"><button type="button" class="stbtn" id="step4Btn" aria-expanded="false" aria-controls="step4Body"><span class="badge" id="step4Badge">4</span><span class="stt"><span class="sttitle" id="sth4">Export</span><span class="stsum" id="step4Sum"></span></span></button><span class="hw" data-help="files"></span><span class="stact" aria-hidden="true" id="step4Act">Open</span></div>
+    <div class="stbody" id="step4Body" hidden>
+      <div class="row"><span class="lab" data-help="files">Files</span>
+        <label class="chk"><input type="checkbox" id="fPNG" checked> PNG</label><label class="chk"><input type="checkbox" id="fTIF"> TIFF</label><label class="chk"><input type="checkbox" id="fPDF"> PDF</label></div>
+      <div class="row"><button class="pri big" type="button" id="export" disabled>Write files</button></div>
+      <div id="expStatus" class="small statusline" role="status" aria-live="polite"></div>
+      <ul class="links" id="links"></ul>
+      <p class="small">One file for each sheet at full size, with transparency, plus a white file if step 2 says so. Load them into your RIP.</p>
+    </div>
+  </section>
+  <div class="stepfoot"><button type="button" id="shopOpen" aria-haspopup="dialog">Shop setup</button><button type="button" id="helpOpen" aria-haspopup="dialog">? Help</button><div class="seg tseg" id="themeSeg" role="group" aria-label="Theme"><button type="button" data-v="light" aria-pressed="false">Light</button><button type="button" data-v="dark" aria-pressed="false">Dark</button><button type="button" data-v="device" aria-pressed="false">Device</button></div></div>
+</aside>
+
+<main class="pane work" id="paneStage" aria-label="Workspace">
+  <div class="square" id="square">
+    <div class="canvasbox"><canvas id="view0" width="600" height="600" aria-label="Workspace view"></canvas></div>
+    <span class="sizebadge" id="sizeBadge" hidden></span>
+    <div class="busymask" id="busyMask" role="status" aria-live="polite" hidden><span class="busylogo" aria-hidden="true"></span><span class="busytext" id="busyText">Working…</span></div>
+    <button type="button" class="advrail" id="sideOpen" hidden>Advanced</button>
+    <label class="drop" id="drop" for="file" tabindex="0" aria-label="Drop your designs here, or tap to select files"><div class="dropempty"><svg class="upicon" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="19" r="3.5" fill="currentColor"/><path d="M7 37l11-11 7 7 6-6 10 10" fill="none" stroke="currentColor" stroke-width="2"/><rect x="31" y="1" width="16" height="16" fill="var(--surface)"/><path d="M39 15V4M34 9l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2.4"/></svg><b>Drop your designs here</b><span>or click to select transparent PNG files</span><span class="small">Your art stays on this device. It is not uploaded.</span><button type="button" class="linkbtn droptry" id="dropSample">Try the sample designs</button></div></label>
+  </div>
+  <input type="file" id="file" class="vh" accept="image/png,image/webp" multiple tabindex="-1" aria-hidden="true">
+  <div class="viewbar" id="viewBar">
+    <div class="seg" id="view" role="group" aria-label="View"><button type="button" data-v="art" aria-pressed="false">Art</button><button type="button" data-v="proof" aria-pressed="true">Proof</button><button type="button" data-v="sheet" aria-pressed="false">Sheet</button><button type="button" data-v="white" aria-pressed="false">White</button></div>
+  </div>
+  <section class="rating" id="rating" aria-label="Checks">
+    <button type="button" class="drate" id="dRate" aria-expanded="false" aria-controls="rData"><b id="drNum">–</b><span class="drfacts" id="drFacts"></span><span class="mrde" id="mrDe">No designs yet</span><span class="mrarr" aria-hidden="true">▾</span></button>
+    <div class="rdata" id="rData">
+      <div class="rmain"><span class="lab" data-help="preflight">Checks</span></div>
+      <div id="preflight" class="checks" role="status"></div>
+      <span class="lab rnumlab">Numbers</span>
+      <div class="stats">
+        <div><span class="lab">Designs</span><b id="sDesigns">–</b></div>
+        <div><span class="lab">Pieces</span><b id="sPieces">–</b></div>
+        <div><span class="lab">Film, in</span><b id="sFilm">–</b></div>
+        <div><span class="lab">Film use</span><b id="sUse">–</b></div>
+        <div><span class="lab">Half-clear px fixed</span><b id="sSemi">–</b></div>
+      </div>
+    </div>
+  </section>
+  <p class="note" id="viewNote"></p>
+</main>
+
+<aside class="pane side" id="paneSide" aria-label="Advanced">
+  <header class="advhd"><div><h2>Advanced Settings</h2><span class="advtitle" id="sideTitle"></span></div><button type="button" class="ibtn" id="sideClose" aria-label="Close Advanced Settings">×</button></header>
+  <div class="sidesec prows" data-for="1 2 3 4">
+    <div class="pkey"><span><i class="pm hand"></i>You set</span><span><i class="pm"></i>Standard</span></div>
+  </div>
+  <div class="sidesec" data-for="1">
+    <section class="tips"><span class="panelab">Good art</span><ul><li>PNG with a transparent background.</li><li>About 300 pixels for each inch of print width.</li><li>Lines and gaps at least 0.5 mm wide.</li></ul></section>
+  </div>
+  <div class="sidesec prows" data-for="1">
+    <details class="pgrp" open><summary><span>Alpha repair</span><span class="psum" data-sum="1"></span></summary>
+      <div class="prow wide"><i class="pm" data-pm="aMode"></i><label class="pl" for="aMode" data-help="repair">Fades</label><div class="pc"><span class="selw"><select id="aMode"><option value="halftone">Halftone dots</option><option value="threshold">Cut at 50 %</option></select></span></div></div>
+      <div class="prow"><i class="pm" data-pm="aLpi"></i><label class="pl" for="aLpi" data-help="lpi">LPI</label><div class="pc"><div class="stepper sp"><button type="button" class="stp" data-for="aLpi" data-d="-5" aria-label="LPI smaller">−</button><input type="number" id="aLpi" min="10" max="85" step="1" value="35"><button type="button" class="stp" data-for="aLpi" data-d="5" aria-label="LPI larger">+</button></div></div></div>
+      <div class="prow"><i class="pm" data-pm="aAngle"></i><label class="pl" for="aAngle">Angle</label><div class="pc"><input type="number" id="aAngle" min="0" max="90" step="0.5" value="22.5"><em>°</em></div></div>
+      <div class="prow"><i class="pm" data-pm="aMin"></i><label class="pl" for="aMin" data-help="minDot">Smallest dot</label><div class="pc"><input type="number" id="aMin" min="0" max="40" step="1" value="10"><em>%</em></div></div>
+      <div class="prow"><i class="pm" data-pm="aMax"></i><label class="pl" for="aMax">Largest dot</label><div class="pc"><input type="number" id="aMax" min="60" max="100" step="1" value="90"><em>%</em></div></div>
+      <div class="prow"><i class="pm" data-pm="aEdge"></i><label class="pl" for="aEdge" data-help="edgePx">Edge band</label><div class="pc"><input type="number" id="aEdge" min="0" max="6" step="1" value="1"><em>px</em></div></div>
+    </details>
+    <button type="button" class="pdef" data-def="1">Default</button>
+  </div>
+  <div class="sidesec prows" data-for="2">
+    <details class="pgrp" open><summary><span>White layer</span><span class="psum" data-sum="2"></span></summary>
+      <div class="prow"><i class="pm" data-pm="wChoke"></i><label class="pl" for="wChoke" data-help="choke">Choke</label><div class="pc"><div class="stepper sp"><button type="button" class="stp" data-for="wChoke" data-d="-1" aria-label="Choke smaller">−</button><input type="number" id="wChoke" min="0" max="9" step="1" value="1"><button type="button" class="stp" data-for="wChoke" data-d="1" aria-label="Choke larger">+</button></div></div></div>
+      <div class="prow"><i class="pm" data-pm="wSpread"></i><label class="pl" for="wSpread" data-help="spread">Spread</label><div class="pc"><input type="number" id="wSpread" min="0" max="20" step="1" value="0"><em>px</em></div></div>
+      <div class="prow"><i class="pm" data-pm="wDensity"></i><label class="pl" for="wDensity" data-help="density">Density</label><div class="pc"><input type="number" id="wDensity" min="0" max="100" step="1" value="100"><em>%</em></div></div>
+      <div class="prow wide"><i class="pm" data-pm="wMode"></i><label class="pl" for="wMode" data-help="whiteMode">White amount</label><div class="pc"><span class="selw"><select id="wMode"><option value="full">Full under every colour</option><option value="by-colour">Less under dark colours</option></select></span></div></div>
+      <div class="prow"><i class="pm" data-pm="wThin"></i><label class="pl" for="wThin" data-help="keepThin">Keep white under thin lines</label><div class="pc"><input type="checkbox" id="wThin" checked></div></div>
+    </details>
+    <details class="pgrp"><summary><span>Knock out</span><span class="psum" data-sum="2k"></span></summary>
+      <div class="prow wide"><i class="pm" data-pm="wKnock"></i><label class="pl" for="wKnock" data-help="knock">Knock out</label><div class="pc"><input type="text" id="wKnock" placeholder="#000000" autocomplete="off" spellcheck="false"></div></div>
+      <div class="prow wide"><i class="pm" data-pm="wNoWhite"></i><label class="pl" for="wNoWhite" data-help="noWhite">No white under</label><div class="pc"><input type="text" id="wNoWhite" placeholder="#000000" autocomplete="off" spellcheck="false"></div></div>
+    </details>
+    <button type="button" class="pdef" data-def="2">Default</button>
+  </div>
+  <div class="sidesec prows" data-for="3">
+    <details class="pgrp" open><summary><span>Packing</span><span class="psum" data-sum="3"></span></summary>
+      <div class="prow"><i class="pm" data-pm="nRotate"></i><label class="pl" for="nRotate" data-help="rotate">Turn designs</label><div class="pc"><input type="checkbox" id="nRotate" checked></div></div>
+      <div class="prow"><i class="pm" data-pm="nEdge"></i><label class="pl" for="nEdge" data-help="edgeIn">Clear film at ends</label><div class="pc"><input type="number" id="nEdge" min="0" max="12" step="0.25" value="0"><em>in</em></div></div>
+      <div class="prow"><i class="pm" data-pm="nSearch"></i><label class="pl" for="nSearch" data-help="search">Packing search</label><div class="pc"><input type="number" id="nSearch" min="0" max="2000" step="50" value="200"><em>swaps</em></div></div>
+    </details>
+    <button type="button" class="pdef" data-def="3">Default</button>
+  </div>
+  <div class="sidesec prows" data-for="4">
+    <details class="pgrp" open><summary><span>Files</span><span class="psum" data-sum="4"></span></summary>
+      <div class="prow wide"><i class="pm" data-pm="fTiffZ"></i><label class="pl" for="fTiffZ" data-help="tiff">TIFF compression</label><div class="pc"><span class="selw"><select id="fTiffZ"><option value="none">None</option><option value="deflate">Deflate</option></select></span></div></div>
+      <div class="prow wide"><i class="pm" data-pm="fInvert"></i><label class="pl" for="fInvert" data-help="invertWhite">White file values</label><div class="pc"><span class="selw"><select id="fInvert"><option value="no">255 is full white</option><option value="yes">Inverted</option></select></span></div></div>
+    </details>
+    <button type="button" class="pdef" data-def="4">Default</button>
+  </div>
+</aside>
+</div>
+
+<nav class="mnav" id="mNav" aria-label="Step navigation"><div class="mprog" id="mProg" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><i></i><i></i><i></i><i></i></div><div class="mbtns"><button type="button" id="mBack">← Back</button><button type="button" class="pri" id="mNext">Next →</button></div></nav>
+
+<dialog id="shopPanel" aria-labelledby="hShop">
+  <div class="row between"><h2 id="hShop">Shop setup</h2><button type="button" class="dclose" data-close="shopPanel">Close</button></div>
+  <section aria-labelledby="hMach">
+    <div class="row between"><h2 id="hMach" data-help="machine">Saved machines</h2><span class="pill" id="machPill"></span></div>
+    <p class="small">Saved in this browser. Your ADN account will keep them for every device.</p>
+    <ul class="machines" id="machList"></ul>
+    <div class="row"><input type="text" id="machName" placeholder="Name, for example Back room 24 in" aria-label="Name of the machine" maxlength="80"><button type="button" class="pri" id="machSave">Save the machine in step 2</button></div>
+    <p class="small" id="machNote" role="status"></p>
+  </section>
+</dialog>
+<dialog id="helpPanel" aria-labelledby="hHelp">
+  <div class="row between"><h2 id="hHelp">Help</h2><button type="button" id="helpClose" aria-label="Close help">Close</button></div>
+  <input type="search" id="helpQ" placeholder="Search: white, choke, RIP, halftone…" aria-label="Search help">
+  <div id="helpList"></div>
+  <p class="small" id="helpNone" hidden>Nothing found. Try a shorter word, like "white" or "dot".</p>
+  <p class="small">DTF Table · MIT License · free and open source</p>
+</dialog>
+</body>
+</html>

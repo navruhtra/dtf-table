@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM"],
+    "types": [],
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/alpha.js", "src/white.js", "src/machines.js", "src/nest.js", "src/sheet.js", "src/preflight.js", "src/browser.js", "src/page.js", "src/help.js", "src/version.js"]
+}

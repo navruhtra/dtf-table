@@ -1,0 +1,31 @@
+{
+  "name": "dtf-table",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Prepare direct-to-film (DTF) print files: alpha repair, white layer, gang sheets and preflight. Files go to your own RIP.",
+  "homepage": "https://americandreamnetwork.us/tools/printing/dtf-transfers/dtf-table",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/navruhtra/dtf-table.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "setup": "node scripts/fetch-vendor.mjs",
+    "start": "node scripts/server.cjs",
+    "test": "node tests/check.mjs && node tests/sheet.mjs && node tests/browser.mjs",
+    "typecheck": "npm install --no-save --no-package-lock --silent --prefix .cache/ts typescript@5.9.3 && .cache/ts/node_modules/.bin/tsc -p tsconfig.json",
+    "setup:bench": "python3 -m venv .venv && .venv/bin/pip install --quiet rectpack==0.2.2",
+    "benchmark": "node benchmark/run.mjs --python .venv/bin/python",
+    "setup:e2e": "npm install --no-save --no-package-lock --silent --prefix .cache/pw playwright@1.49.1 && npx --prefix .cache/pw playwright install chromium",
+    "e2e": "NODE_PATH=.cache/pw/node_modules:$NODE_PATH node tests/page.cjs",
+    "shots": "NODE_PATH=.cache/pw/node_modules:$NODE_PATH node scripts/shots.cjs",
+    "notices": "node scripts/notices.mjs",
+    "release:check": "node scripts/release.mjs check",
+    "targets": "node scripts/test-targets.mjs",
+    "big-sheet": "node scripts/big-sheet.mjs"
+  },
+  "license": "MIT"
+}
